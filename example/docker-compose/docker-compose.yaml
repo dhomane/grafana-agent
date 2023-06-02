@@ -29,7 +29,7 @@ services:
       - "3100:3100"
 
   cortex:
-    image: cortexproject/cortex:latest
+    image: cortexproject/cortex:v1.8.1
     volumes:
       - ./cortex/config:/etc/cortex-config
     entrypoint:
