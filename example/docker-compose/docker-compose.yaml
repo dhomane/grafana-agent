@@ -9,7 +9,7 @@ services:
   #
 
   grafana:
-    image: grafana/grafana:9.2.3
+    image: grafana/grafana-oss:10.0.0-preview
     entrypoint:
       - /usr/share/grafana/bin/grafana-server
       - --homepath=/usr/share/grafana
@@ -23,13 +23,13 @@ services:
       - "3000:3000"
 
   loki:
-    image: grafana/loki:2.6.1
+    image: grafana/loki:latest
     command: -config.file=/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
 
   cortex:
-    image: cortexproject/cortex:v1.8.1
+    image: cortexproject/cortex:latest
     volumes:
       - ./cortex/config:/etc/cortex-config
     entrypoint:
@@ -39,7 +39,7 @@ services:
       - "9009:9009"
 
   tempo:
-    image: grafana/tempo:1.5.0
+    image: grafana/tempo:latest
     command:
       - "-search.enabled=true"
       - "-storage.trace.backend=local"                  # tell tempo where to permanently put traces
@@ -63,7 +63,7 @@ services:
   # tracing load generator
   synthetic-load-generator:
     profiles: [agent] # Should only be run if the Agent is present
-    image: omnition/synthetic-load-generator:1.0.25
+    image: omnition/synthetic-load-generator:latest
     volumes:
       - ./load-generator:/etc/load-generator
     environment:
